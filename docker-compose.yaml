@@ -461,6 +461,12 @@ services:
       SUPERSET_LOG_LEVEL: "${SUPERSET_LOG_LEVEL:-info}"
     networks:
       - docker-net
+  flask-server:
+    build:
+      context: internal/flask_app/server
+      target: builder
+    ports:
+      - '47900:47900'
 
 volumes:
   postgres-db-volume:
