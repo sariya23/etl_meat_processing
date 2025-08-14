@@ -1,7 +1,7 @@
 x-superset-image: &superset-image apachesuperset.docker.scarf.sh/apache/superset:${TAG:-latest-dev}
 x-superset-volumes:
   &superset-volumes # /app/pythonpath_docker will be appended to the PYTHONPATH in the final container
-  - ./docker:/app/docker
+  - ./superset_data/docker:/app/docker
   - superset_home:/app/superset_home
 
 
@@ -355,24 +355,24 @@ services:
 
   db:
     env_file:
-      - path: docker/.env # default
+      - path: ./superset_data/docker/.env # default
         required: true
-      - path: docker/.env-local # optional override
+      - path: ./superset_data/docker/.env # optional override
         required: false
     image: postgres:15
     container_name: superset_db
     restart: unless-stopped
     volumes:
       - db_home:/var/lib/postgresql/data
-      - ./docker/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ./superset_data/docker/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     networks:
       - docker-net
 
   superset:
     env_file:
-      - path: docker/.env # default
+      - path: ./superset_data/docker/.env # default
         required: true
-      - path: docker/.env-local # optional override
+      - path: ./superset_data/docker/.env-local # optional override
         required: false
     image: *superset-image
     container_name: superset_app
@@ -395,9 +395,9 @@ services:
     container_name: superset_init
     command: ["/app/docker/docker-init.sh"]
     env_file:
-      - path: docker/.env # default
+      - path: ./superset_data/docker/.env # default
         required: true
-      - path: docker/.env-local # optional override
+      - path: ./superset_data/docker/.env-local # optional override
         required: false
     depends_on:
       db:
@@ -419,9 +419,9 @@ services:
     container_name: superset_worker
     command: ["/app/docker/docker-bootstrap.sh", "worker"]
     env_file:
-      - path: docker/.env # default
+      - path: ./superset_data/docker/.env # default
         required: true
-      - path: docker/.env-local # optional override
+      - path: ./superset_data/docker/.env-local # optional override
         required: false
     restart: unless-stopped
     depends_on:
@@ -445,9 +445,9 @@ services:
     container_name: superset_worker_beat
     command: ["/app/docker/docker-bootstrap.sh", "beat"]
     env_file:
-      - path: docker/.env # default
+      - path: ./superset_data/docker/.env # default
         required: true
-      - path: docker/.env-local # optional override
+      - path: ./superset_data/docker/.env-local # optional override
         required: false
     restart: unless-stopped
     depends_on:
