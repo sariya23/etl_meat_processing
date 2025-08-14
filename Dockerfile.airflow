@@ -1,0 +1,4 @@
+FROM apache/airflow:3.0.4
+
+# Устанавливаем airflow-clickhouse-plugin
+RUN pip install --no-cache-dir airflow-clickhouse-plugin
