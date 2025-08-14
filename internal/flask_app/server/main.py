@@ -8,13 +8,12 @@ from flask import (
     render_template_string,
     request,
     send_file,
-    url_for,
 )
 
 app = Flask(__name__)
 
 app = Flask(__name__)
-app.secret_key = "supersecret"  # Нужно для flash-сообщений
+app.secret_key = "supersecret"
 
 UPLOAD_FOLDER: str = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -82,6 +81,7 @@ def download_file(filename):
         return {"error": "Файл не найден"}, 404
 
     return send_file(filepath, as_attachment=True)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
