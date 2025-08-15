@@ -469,6 +469,8 @@ services:
     container_name: flask-server
     ports:
       - '47900:47900'
+    networks:
+      - docker-net
 
 volumes:
   postgres-db-volume:
