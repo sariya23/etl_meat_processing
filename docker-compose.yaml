@@ -462,10 +462,10 @@ services:
       SUPERSET_LOG_LEVEL: "${SUPERSET_LOG_LEVEL:-info}"
     networks:
       - docker-net
+
   flask-server:
     build:
       context: internal/flask_app/server
-      target: builder
     container_name: flask-server
     ports:
       - '47900:47900'

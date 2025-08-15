@@ -12,8 +12,6 @@ COPY . /app
 ENTRYPOINT ["python3"]
 CMD ["main.py"]
 
-FROM builder as dev-envs
-
 RUN <<EOF
 apk update
 apk add git
