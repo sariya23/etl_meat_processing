@@ -64,6 +64,7 @@ def download_data_to_local_file(url: str, **context):
     file_name = url.split("/")[-1]
     if not response.ok:
         print(response.content)
+        print(url)
         raise requests.exceptions.RequestException()
 
     with open(file_name, "wb") as f:
@@ -83,7 +84,7 @@ create_table_task = ClickHouseOperator(
 download_data = PythonOperator(
     task_id="download_data_to_local_csv",
     python_callable=download_data_to_local_file,
-    op_args=[f"http://flask-server:{47900}/download/" + "{{ ds }}.csv"],
+    op_args=[f"http://flask-server:{47900}/download/" + "{{ ds }}.xlsx"],
     dag=dag,
 )
 
