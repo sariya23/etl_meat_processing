@@ -2,3 +2,4 @@ FROM apache/airflow:3.0.4
 
 RUN pip install --no-cache-dir airflow-clickhouse-plugin 
 RUN pip install --no-cache-dir clickhouse-connect
+RUN pip install --no-cache-dir openpyxl

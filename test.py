@@ -1,5 +1,5 @@
-from clickhouse_connect import get_client
+import pandas as pd
 
 
-cl = get_client(host="localhost", username="admin", password="qwerty")
-cl.command("create table t (a String) ENGINE MergeTree order by a")
+df = pd.read_excel("data.xlsx")
+print(df.head()["Дата_заказа"])

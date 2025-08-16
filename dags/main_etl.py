@@ -69,7 +69,11 @@ def download_data_to_local_file(url: str, **context):
 
     with open(file_name, "wb") as f:
         f.write(response.content)
-    
+
+def transform_to_csv(filename: str, filename_csv: str):
+    df = pd.read_excel(filename)
+    df.to_csv(filename_csv, sep=",", encoding="utf-8", index=False)
+        
 
 dag = DAG("main_etl", schedule="0 17 * * 5", start_date=datetime(2025, 8, 15), max_active_runs=1)
 
@@ -81,11 +85,18 @@ create_table_task = ClickHouseOperator(
     dag=dag,
 )
 
-download_data = PythonOperator(
+download_data_task = PythonOperator(
     task_id="download_data_to_local_csv",
     python_callable=download_data_to_local_file,
     op_args=[f"{API_HOST}:{API_PORT}/download/" + "{{ ds }}.xlsx"],
     dag=dag,
 )
 
-create_table_task >> download_data
+transform_to_csv_task = PythonOperator(
+    task_id="transform_to_csv_task",
+    python_callable=transform_to_csv,
+    op_args=["{{ ds }}.xlsx","{{ ds }}.csv"],
+    dag=dag,
+)
+
+create_table_task >> download_data_task >> transform_to_csv_task
