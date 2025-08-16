@@ -84,7 +84,7 @@ create_table_task = ClickHouseOperator(
 download_data = PythonOperator(
     task_id="download_data_to_local_csv",
     python_callable=download_data_to_local_file,
-    op_args=[f"http://flask-server:{47900}/download/" + "{{ ds }}.xlsx"],
+    op_args=[f"{API_HOST}:{API_PORT}/download/" + "{{ ds }}.xlsx"],
     dag=dag,
 )
 
