@@ -1,3 +1,3 @@
 FROM apache/airflow:3.0.4
-
-RUN pip install airflow-clickhouse-plugin clickhouse-connect openpyxl apache-airflow==3.0.4
+COPY requirements_airflow.txt .
+RUN pip install -r requirements_airflow.txt
