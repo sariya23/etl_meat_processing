@@ -125,14 +125,14 @@ def get_current_week_data(filename: str, out_filename: str, **context):
     df = pd.read_excel(filename)
     execute_date = datetime.strptime(context["ds"], "%Y-%m-%d")
     week_records = df[
-        (df["Дата_заказа"] == execute_date)
+        (df["Дата_заказа"] <= execute_date)
         & (df["Дата_заказа"] >= execute_date - timedelta(days=7))
     ]
     week_records.to_csv(out_filename, encoding="utf-8", index=False)
 
 
 def load_data_to_clickhouse(filename: str):
-    df = pd.read_csv(filename, encoding="utf=-8")
+    df = pd.read_csv(filename, encoding="utf-8", index_col=0)
     df = df.rename(columns=column_mapping)
     print(df.columns)
     CH_HOOK.execute(f"insert into {TABLE_NAME} values", df.to_dict("records"))
