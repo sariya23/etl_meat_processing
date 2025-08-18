@@ -125,7 +125,7 @@ quantity = np.where(
             np.random.gamma(shape=2.0, scale=10.0, size=N),
         ),
     ),
-).astype(float)
+).astype(int)
 quantity = np.maximum(1, np.round(quantity, 2))
 
 
