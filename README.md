@@ -20,6 +20,19 @@ ETL процесс для загрузки данных в базу данных
 
 ## Картиночки 😍😍😍
 
+### Чарты 📊
+
+![](https://github.com/sariya23/etl_meat_processing/blob/master/docs/imgs/avg_cat_unit_price.jpg)
+![](https://github.com/sariya23/etl_meat_processing/blob/master/docs/imgs/avg_delay.jpg)
+![](https://github.com/sariya23/etl_meat_processing/blob/master/docs/imgs/count_order.jpg)
+![](https://github.com/sariya23/etl_meat_processing/blob/master/docs/imgs/pie.jpg)
+![](https://github.com/sariya23/etl_meat_processing/blob/master/docs/imgs/total_cost_rub.jpg)
+
+### Общий процесс
+
+
+
+
 ## Где что лежит
 
 ```
