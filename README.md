@@ -30,7 +30,7 @@ ETL процесс для загрузки данных в базу данных
 
 ### Общий процесс
 
-
+![](https://github.com/sariya23/etl_meat_processing/blob/master/docs/imgs/flow.jpg)
 
 
 ## Где что лежит
@@ -49,7 +49,6 @@ ETL процесс для загрузки данных в базу данных
 ├── plugins - плагины Airfliow
 ├── requirements.txt - зависимости для работы скрипта по генерации
 ├── requirements_airflow.txt - зависимости для airflow
-├── utils - всякие вспомоглательные штуки: константы и запросы
 └── superset_data - это нам не нада :) данные для работы Superset
 ```
 
